@@ -34,7 +34,7 @@ public class HelloPortImpl implements Hello {
         LOG.info("Executing operation sayHello" + myname);
         try {
             RestTemplate rest = new RestTemplate();
-            rest.getForObject("http://gateway/lg_example", String.class);
+            System.out.println(rest.getForObject("http://gateway/lg_example", String.class));
             return "Hello, Welcome to CXF Spring boot " + myname + "!!!";
         } catch (java.lang.Exception ex) {
             ex.printStackTrace();
