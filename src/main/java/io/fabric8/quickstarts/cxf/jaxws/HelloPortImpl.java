@@ -20,6 +20,8 @@ package io.fabric8.quickstarts.cxf.jaxws;
 
 import java.util.logging.Logger;
 
+import org.springframework.web.client.RestTemplate;
+
 @javax.jws.WebService(serviceName = "HelloService", portName = "HelloPort",
                     targetNamespace = "http://service.ws.sample/", 
                     endpointInterface = "io.fabric8.quickstarts.cxf.jaxws.Hello")
@@ -27,9 +29,12 @@ public class HelloPortImpl implements Hello {
 
     private static final Logger LOG = Logger.getLogger(HelloPortImpl.class.getName());
 
+
     public String sayHello(java.lang.String myname) {
         LOG.info("Executing operation sayHello" + myname);
         try {
+            RestTemplate rest = new RestTemplate();
+            rest.getForObject("http://sidecar:18080/lg_example", String.class)
             return "Hello, Welcome to CXF Spring boot " + myname + "!!!";
         } catch (java.lang.Exception ex) {
             ex.printStackTrace();
